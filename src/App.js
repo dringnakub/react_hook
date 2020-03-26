@@ -7,50 +7,58 @@ import Axios from 'axios';
 
 function App() {
 
-  const [data, setData] = useState({ users: [] });
+  const [data, setData] = useState({ posts: [] });
+  const [query, setQuery] = useState(1);
+  const [search, setSearch] = useState(2);
+  const [isLoading, setIsLoading] = useState(false)
 
-
-  const fetchUsers = async () => {
-    console.log("fetchUsers");
-    const mArray = await Axios.get('https://jsonplaceholder.typicode.com/users');
-    setData({
-      users: mArray.data
-    });
+  const changeValue = (value) => {
+    console.log("test ", value)
+    setQuery(value)
   }
 
-  const showUsers = () => {
-     return data && data.users.map(uu => (
-     <li key={uu.id} >name : {uu.name} username : {uu.username}</li>
-     ))
-  }
-  //   useEffect(() => {
-  //     (async function() {
-  //         try {
-  //             const response = await fetch(
-  //                 'https://jsonplaceholder.typicode.com/users'
-  //             );
-  //             const json = await response.json();
-  //             setData(json.data);
-  //         } catch (e) {
-  //             console.error(e);
-  //         }
-  //     })();
-  // }, []);
+
 
   useEffect(() => {
-    console.log("useEffect");
-    fetchUsers();
+    console.log("useEffect Start ====>")
+    const fetchData = async () => {
+      console.log("fetchData Start ====>");
+      setIsLoading(true);
+      const result = await Axios(`https://jsonplaceholder.typicode.com/posts?userId=${search}`);
+      setData({
+        posts: result.data
+      });
+      setIsLoading(false);
 
-  }, [])
-
+    };
+    fetchData();
+  }, [search]);
 
   return (
     <div>
-      <h1>https://jsonplaceholder.typicode.com/users</h1>
-      <ul>{showUsers()}</ul>
+
+      <input
+        type="text"
+        valu={query}
+        onChange={(e) => setQuery(e.target.value)}
+      />
+
+      {isLoading ? (
+        <div>
+          <h3>Loading...</h3>
+        </div>) :
+        (
+          <ul>
+            {data.posts.map(post => (
+              <li key={post.id}>
+                {post.title}
+              </li>
+            ))}
+          </ul>
+        )}
+
+      <button onClick={() => setSearch(query)}>Change</button>
     </div>
-
-  )
+  );
 }
-
 export default App
