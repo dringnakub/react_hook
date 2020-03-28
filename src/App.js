@@ -7,6 +7,10 @@ import Axios from 'axios';
 import UserList from './components/userList';
 import Ex3Props from './components/ex3_props';
 import Ex4Destructuring from './components/ex4_destructuring';
+import UseStateDemo_2 from './components/UseStateDemo_2';
+import UseStateDemo_3 from './components/UseStateDemo_3';
+import UseEffect from './components/UseEffect';
+import UseEffectInterval from './components/UseEffectInterval';
 
 function App() {
   // const [query, setQuery] = useState(1);
@@ -44,6 +48,7 @@ function App() {
   const var2 = "hello";
   const var3 = true;
   const [count, setCount] = useState(0)
+  const [isShow, setIsShow] = useState(true)
 
   const submit = () => {
     alert("Submit Hey Hey")
@@ -71,6 +76,21 @@ function App() {
       <Ex3Props counter={count} color="#F00" isShowLabel={false} />
       <Ex4Destructuring usernameHint="UserName" passwordHint="PassWord" />
       <Ex4Destructuring handleSubmit={submit} />
+
+
+      <hr />
+      <UseStateDemo_2 />
+
+      <hr />
+
+      <UseStateDemo_3 />
+      <hr />
+
+      {isShow && <UseEffect />}
+      <button onClick={() => setIsShow(false)}>Hide</button>
+
+      <hr />
+      <UseEffectInterval />
     </div>
   )
 }
