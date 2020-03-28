@@ -11,6 +11,9 @@ import UseStateDemo_2 from './components/UseStateDemo_2';
 import UseStateDemo_3 from './components/UseStateDemo_3';
 import UseEffect from './components/UseEffect';
 import UseEffectInterval from './components/UseEffectInterval';
+import UserContextDemo_1 from './components/UserContextDemo_1';
+import UseMemoDemo from './components/UseMemoDemo';
+import UseCallBack from './components/UseCallBack';
 
 function App() {
   // const [query, setQuery] = useState(1);
@@ -91,6 +94,15 @@ function App() {
 
       <hr />
       <UseEffectInterval />
+
+      <hr />
+      <UserContextDemo_1 />
+
+      <hr />
+      <UseMemoDemo />
+
+      <hr />
+      <UseCallBack />
     </div>
   )
 }
